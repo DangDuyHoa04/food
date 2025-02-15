@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 // Kết nối tới MongoDB
-const mongoURI = process.env.MONGO_URI || 'mongodb+srv://api:api123@cluster0.c217b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://api:api123@cluster0.c217b.mongodb.net/myDatabase?retryWrites=true&w=majority'; // Thay 'myDatabase' bằng tên cơ sở dữ liệu của bạn
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
