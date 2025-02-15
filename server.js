@@ -26,7 +26,7 @@ const foodSchema = new mongoose.Schema({
   food_price: Number,
   food_quantity: Number
 });
-
+//sss
 const Food = mongoose.model('Food', foodSchema);
 
 // Kiểm tra xem "food" collection đã tồn tại hay chưa, nếu chưa thì tạo mới
