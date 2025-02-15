@@ -9,19 +9,22 @@ app.use(bodyParser.json());
 
 // Kết nối tới MongoDB
 const mongoURI = process.env.MONGO_URI || 'mongodb+srv://api:api123@cluster0.c217b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000 // Tăng thời gian chờ kết nối lên 5 giây
+})
   .then(() => console.log('MongoDB connected!'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-
 // Tạo schema và model cho "food" collection
 const foodSchema = new mongoose.Schema({
-  evaluate_id : Number,
-  food_id : Number,
+  evaluate_id: Number,
+  food_id: Number,
   food_name: String,
-  food_image : String,
-  food_price : Number,
-  food_quantity : Number
+  food_image: String,
+  food_price: Number,
+  food_quantity: Number
 });
 
 const Food = mongoose.model('Food', foodSchema);
