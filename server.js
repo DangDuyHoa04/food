@@ -8,11 +8,11 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 // Kết nối tới MongoDB
-const mongoURI = process.env.MONGO_URI || 'mongodb+srv://api:api123@cluster0.c217b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const mongoURI = process.env.MONGO_URI || "mongodb+srv://api:api123@cluster0.c217b.mongodb.net/foods?retryWrites=true&w=majority";
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000 // Tăng thời gian chờ kết nối lên 5 giây
+  serverSelectionTimeoutMS: 20000 // Tăng thời gian chờ kết nối lên 20 giây
 })
   .then(() => console.log('MongoDB connected!'))
   .catch(err => console.error('MongoDB connection error:', err));
@@ -26,13 +26,8 @@ const foodSchema = new mongoose.Schema({
   food_price: Number,
   food_quantity: Number
 });
-//sss
-const Food = mongoose.model('Food', foodSchema);
 
-// Kiểm tra xem "food" collection đã tồn tại hay chưa, nếu chưa thì tạo mới
-Food.createCollection()
-  .then(() => console.log('"food" collection is ready'))
-  .catch(err => console.error('Error creating "food" collection:', err));
+const Food = mongoose.model('Food', foodSchema);
 
 // Route để hiển thị danh sách tất cả các sản phẩm
 app.get('/foods', async (req, res) => {
